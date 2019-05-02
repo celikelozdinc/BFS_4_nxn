@@ -61,15 +61,15 @@ def main():
         print("Left Node exists.")
         startNode.Left.puzzle.printTable()
         threading.Thread(name='solution_4_left', target=PP.solution_4_left()).start()
-    if startNode.Right :
+    if startNode.Right is not None:
         print("Right Node exists.")
         startNode.Right.puzzle.printTable()
         threading.Thread(name='solution_4_right', target=PP.solution_4_right()).start()
-    if startNode.Up :
+    if startNode.Up is not None:
         print("Up Node exists.")
         startNode.Up.puzzle.printTable()
         threading.Thread(name='solution_4_up', target=PP.solution_4_up()).start()
-    if startNode.Down :
+    if startNode.Down is not None:
         print("Down Node exists.")
         startNode.Down.puzzle.printTable()
         threading.Thread(name='solution_4_down', target=PP.solution_4_down()).start()
