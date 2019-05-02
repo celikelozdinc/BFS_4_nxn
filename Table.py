@@ -162,16 +162,3 @@ class Table:
             that contains row and column information
             of the empty cell"""
         return list(self.matrix.keys())[list(self.matrix.values()).index(0)]
-
-    """
-    table = Table()
-    table.printTable()
-    table.shiftLeft()
-    table.shiftUp()
-    table.shiftRight()
-    table.shiftRight()
-    table.shiftDown()
-    table.shiftDown()
-    table.printTable()
-    print(table.visitedCells)
-    """

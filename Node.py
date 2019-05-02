@@ -113,64 +113,55 @@ class Node:
             else:
                 rootOfCurrent.findPathToRoot(startNode)
 
+    def BFS_Serial(self, finishNode):
+        """Python's built-in List data structure
+            comes bundled with methods to simulate both stack and queue operations."""
+        PQ = []
+        PQ.append(self)
+        self.visited = True
+        self.puzzle.printTable()
 
+        """ Store Timestamp When We Started To BFS Traversal"""
+        startTS = datetime.datetime.now()
+        while len(PQ) is not 0:
+            # Pop a node from queue
+            removedFromQueue = PQ.pop(0)
+            removedFromQueue.puzzle.appendToVisitedPuzzles(removedFromQueue.puzzle.matrix)
+            removedFromQueue.puzzle.printTable()
+            if removedFromQueue == finishNode:
+                print("ACHIEVED GOAL STATE!")
+                finishTS = datetime.datetime.now()
+                print("Start Time: {}:{}.{}.{} ".format(startTS.hour, startTS.minute, startTS.second,
+                                                        startTS.microsecond))
+                print("Finish Time: {}:{}.{}.{} ".format(finishTS.hour, finishTS.minute, finishTS.second,
+                                                         finishTS.microsecond))
+                print("Processing Time: {}".format(finishTS.microsecond - startTS.microsecond))
+                removedFromQueue.findPathToRoot(self)
+                return;
 
-def main():
-    """Python's built-in List data structure
-    comes bundled with methods to simulate both stack and queue operations."""
-    PQ = []
-    #startNode = Node(2, 8, 3, 1, 6, 4, 7, 0, 5)
-    #finishNode = Node(1, 2, 3, 8, 0, 4, 7, 6, 5)
-    startNode = Node(0, 2, 3, 1, 4, 5, 8, 7, 6)
-    finishNode = Node(1, 2, 3, 8, 0, 4, 7, 6, 5)
-    PQ.append(startNode)
-    startNode.visited = True
-    startNode.puzzle.printTable()
+            removedFromQueue.constructNeighbours()
+            if removedFromQueue.Left is not None:
+                print("Left node exists.")
+                if removedFromQueue.Left.visited is False:
+                    print("Left node is not traversed.")
+                    removedFromQueue.Left.visited = True
+                    PQ.append(removedFromQueue.Left)
+            if removedFromQueue.Right is not None:
+                print("Right node exists.")
+                if removedFromQueue.Right.visited is False:
+                    print("Right node is not traversed.")
+                    removedFromQueue.Right.visited = True
+                    PQ.append(removedFromQueue.Right)
+            if removedFromQueue.Up is not None:
+                print("Up node exists.")
+                if removedFromQueue.Up.visited is False:
+                    print("Up node is not traversed.")
+                    removedFromQueue.Up.visited = True
+                    PQ.append(removedFromQueue.Up)
+            if removedFromQueue.Down is not None:
+                print("Down node exists.")
+                if removedFromQueue.Down.visited is False:
+                    print("Down node is not traversed.")
+                    removedFromQueue.Down.visited = True
+                    PQ.append(removedFromQueue.Down)
 
-    """ Store Timestamp When We Started To BFS Traversal"""
-    startTS  = datetime.datetime.now()
-    while len(PQ) is not 0:
-        removedFromQueue = PQ.pop(0)
-        removedFromQueue.puzzle.appendToVisitedPuzzles(removedFromQueue.puzzle.matrix)
-        removedFromQueue.puzzle.printTable()
-        if removedFromQueue == finishNode:
-            print("ACHIEVED GOAL STATE!")
-            finishTS = datetime.datetime.now()
-            print("Start Time: {}:{}.{}.{} ".format(startTS.hour, startTS.minute, startTS.second, startTS.microsecond))
-            print("Finish Time: {}:{}.{}.{} ".format(finishTS.hour, finishTS.minute, finishTS.second, finishTS.microsecond))
-            print("Processing Time: {}".format(finishTS.microsecond - startTS.microsecond))
-            removedFromQueue.findPathToRoot(startNode)
-            return ;
-
-        removedFromQueue.constructNeighbours()
-        if removedFromQueue.Left is not None:
-            print("Left node exists.")
-            if removedFromQueue.Left.visited is False:
-                print("Left node is not traversed.")
-                removedFromQueue.Left.visited = True
-                PQ.append(removedFromQueue.Left)
-        if removedFromQueue.Right is not None:
-            print("Right node exists.")
-            if removedFromQueue.Right.visited is False:
-                print("Right node is not traversed.")
-                removedFromQueue.Right.visited = True
-                PQ.append(removedFromQueue.Right)
-        if removedFromQueue.Up is not None:
-            print("Up node exists.")
-            if removedFromQueue.Up.visited is False:
-                print("Up node is not traversed.")
-                removedFromQueue.Up.visited = True
-                PQ.append(removedFromQueue.Up)
-        if removedFromQueue.Down is not None:
-            print("Down node exists.")
-            if removedFromQueue.Down.visited is False:
-                print("Down node is not traversed.")
-                removedFromQueue.Down.visited = True
-                PQ.append(removedFromQueue.Down)
-
-
-
-
-
-
-main()
